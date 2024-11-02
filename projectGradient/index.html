@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Gradient</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(
+                to right top,
+                #051937,
+                #004d7a,
+                #008793,
+                #00bf72,
+                #a8eb12
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button{
+            height: 3rem;
+            width: 6rem;
+            border-radius: 40%;
+        }
+        h4{
+            margin-left: 50px;
+            color: white;
+        }
+        .copyCode{
+            border: 2px solid grey;
+            height: 4rem;
+            width: 13rem;
+            padding: 5px;
+            color: white;
+        }
+        #button1{
+            text-align: center;
+            color: white;
+            background-color: #051937;
+        }
+        #button2{
+            text-align: center;
+            color: black;
+            background-color: #a8eb12;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button id="button1">#004773</button>
+        <button id="button2">#54d542</button>
+        <h4>copy your color</h4>
+        <div class="copyCode">
+            background-image: linear-gradient(to right , #004773 , #54d542)
+        </div>
+    </div>
+    <script>
+        let btn1 = document.getElementById("button1");
+        let btn2 = document.getElementById("button2");
+        let copyDiv = document.querySelector(".copyCode");
+        let rgb1 = "#004773" ;
+        let rgb2 = "#54d542";
+
+        const hexValues = () => {
+            let myHexValues = "0123456789abcdef";
+            let color = "#";
+            for(let i=0;i<6;i++){
+                color = color + myHexValues[(Math.floor(Math.random() * 16))];
+            }
+            return color;
+        };
+
+        const handleButton1 = () => {
+            rgb1 = hexValues();
+            console.log(rgb1);
+            btn1.innerText = rgb1;
+            document.body.style.backgroundImage = `linear-gradient(to right ,${rgb1},${rgb2})`;
+            copyDiv.innerHTML = ` background-image: linear-gradient(to right , ${rgb1} , ${rgb2})`
+        };
+
+        const handleButton2 = () => {
+            rgb2 = hexValues();
+            console.log(rgb2);
+            btn2.innerText = rgb2;
+            document.body.style.backgroundImage = `linear-gradient(to right ,${rgb1},${rgb2})`;
+            copyDiv.innerHTML = ` background-image: linear-gradient(to right , ${rgb1} , ${rgb2})`
+        };
+
+        btn1.addEventListener("click",handleButton1);
+        btn2.addEventListener("click",handleButton2);
+
+        copyDiv.addEventListener("click",() => {
+            navigator.clipboard.writeText(copyDiv.innerText)
+        })
+    </script>
+</body>
+</html>
